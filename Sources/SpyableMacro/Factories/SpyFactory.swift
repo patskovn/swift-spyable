@@ -111,9 +111,15 @@ struct SpyFactory {
       name: identifier,
       genericParameterClause: genericParameterClause,
       inheritanceClause: InheritanceClauseSyntax {
-        InheritedTypeSyntax(
-          type: IdentifierTypeSyntax(name: protocolDeclaration.name)
-        )
+        InheritedTypeListSyntax {
+          InheritedTypeSyntax(
+            type: IdentifierTypeSyntax(name: protocolDeclaration.name)
+          )
+          InheritedTypeSyntax(
+            leadingTrivia: "@unchecked ",
+            type: IdentifierTypeSyntax(name: "Sendable")
+          )
+        }
       },
       memberBlockBuilder: {
         for variableDeclaration in variableDeclarations {
